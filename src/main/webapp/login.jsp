@@ -28,7 +28,7 @@ $(function(){
   </tr>
   
   <tr>
-    <td  height="50" valign="top"><input name="j_password"  style="margin-top: 6px; "  type="password" class="kuw easyui-validatebox"  id="password"   data-options="required:true,validType:['length[6,16]']" /></td>
+    <td  height="50" valign="top"><input name="j_password"  style="margin-top: 6px; "  type="password" class="kuw easyui-validatebox"  id="password"   data-options="required:true,validType:['length[6,16]']" missingMessage="请输入密码"/></td>
   </tr>
   <tr>
   	<td height="25" valign="middle" ><font color="red" id="message">${message}</font></td>

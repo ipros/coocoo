@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.coocoo.orm.mapper.ResourceInfoMapper">
 	<sql id="column_id">
-		fid resource_id,
-		fname resource_name,
-		furl resource_url
+		id resource_id,
+		resource_name resource_name,
+		resource_url resource_url
 	</sql>
 
 	<resultMap type="resourceInfo" id="resourceInfoMap">
