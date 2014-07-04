@@ -30,6 +30,7 @@ public class ResourceInfoServiceTest {
 		Pager<ResourceInfo> pager = Pager.DEFAULT;
 //		pager.setPageNo(1);
 //		pager.setPageSize(5);
+
 		List<ResourceInfo>  list = resourceInfoService.getResourceRole(pager);
 		for (ResourceInfo resourceInfo : list) {
 			List<RoleInfo> roleInfos = resourceInfo.getRoleInfos();
