@@ -23,24 +23,24 @@
 	
 	<select id="getResourceRole" resultMap="resourceRoleMap">
 		select 
-		a.fid resource_id,
-		a.fname resource_name,
-		a.furl resource_url,
-		c.fid role_id,
-		c.frolename role_name 
+		a.id resource_id,
+		a.name resource_name,
+		a.url resource_url,
+		c.id role_id,
+		c.rolename role_name
 		from tbl_resource_info a 
-		left join tbl_role_resource b on a.fid=b.fsid 
-		left join tbl_role_info c on c.fid=b.frid 
+		left join tbl_role_resource b on a.id=b.sid
+		left join tbl_role_info c on c.id=b.rid
 	</select>
 	<select id="getResourceRoles"  resultMap="resourceRoleMap">
 		select 
-		a.fid resource_id,
-		a.fname resource_name,
-		a.furl resource_url,
-		c.fid role_id,
-		c.frolename role_name 
+		a.id resource_id,
+		a.name resource_name,
+		a.url resource_url,
+		c.id role_id,
+		c.role_name role_name
 		from tbl_resource_info a 
-		left join tbl_role_resource b on a.fid=b.fsid 
-		left join tbl_role_info c on c.fid=b.frid 
+		left join tbl_role_resource b on a.id=b.sid
+		left join tbl_role_info c on c.id=b.rid
 	</select>
 </mapper>
