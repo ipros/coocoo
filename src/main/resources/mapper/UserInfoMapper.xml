@@ -33,7 +33,7 @@
 		a.id user_id,
 		a.username username,
 		a.password password,
-		c.rolename role_name
+		c.role_name role_name
 		from tbl_user_info a
 		left join tbl_user_role b on a.id=b.uid
 		left join tbl_role_info c on c.id=b.rid
