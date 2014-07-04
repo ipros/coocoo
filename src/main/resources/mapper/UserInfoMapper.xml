@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coocoo.orm.mapper.UserInfoMapper">
+	<sql id="column_id">
+		fid user_id,
+		fusername username,
+		fpassword password
+	</sql>
+	
+	<resultMap type="userInfo" id="userInfoMap">
+	<id property="id" column="user_id"/>
+	<result property="username" column="username"/>
+	<result property="password" column="password"/>
+	</resultMap>
+	
+	<resultMap type="userInfo" id="userRoleMap" extends="userInfoMap">
+	<collection property="roleInfos" ofType="roleInfo" javaType="list" resultMap="com.coocoo.orm.mapper.RoleInfoMapper.roleInfoMap"></collection>
+	</resultMap>
+	
+	<select id="findAll" resultType="userInfo">
+		select  <include refid="column_id"/> from tbl_user_info
+	</select>
+	<select id="getList" resultType="userInfo">
+		select  fusername username,fpassword password from tbl_user_info
+	</select>
+	
+	<insert id="add" parameterType="userInfo">
+		insert into tbl_user_info(fusername,fpassword) values(#{username},#{password})
+	</insert>
+	
+	<select id="getUserRoleByUsername" parameterType="String" resultMap="userRoleMap">
+		select 
+		a.fid user_id,
+		a.fusername username,
+		a.fpassword password,
+		c.frolename role_name
+		from tbl_user_info a
+		left join tbl_user_role b on a.fid=b.fuid
+		left join tbl_role_info c on c.fid=b.frid
+		where a.fusername=#{username}
+	</select>
+</mapper>

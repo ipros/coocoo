@@ -1,0 +1,62 @@
+package com.htdf.orm.mybatis;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+/**
+ * DAO基类
+ * @author adam
+ * key  namespase.id 
+ * 	  对应的mapper.xml的namespace和select、delete、update、insert的id
+ */
+public class BaseDao extends SqlSessionDaoSupport {
+	
+	/**
+	 * 解决sqlSessionFactory无法自动注入
+	 */
+	@Resource
+	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory){
+		super.setSqlSessionFactory(sqlSessionFactory);
+	}
+	
+	//save object
+	protected void save(String key, Object object) {
+		getSqlSession().insert(key, object);
+	}
+	//delete object by id
+	protected void delete(String key, Serializable id) {
+		getSqlSession().delete(key, id);
+	}
+	//delete object by obj
+	protected void delete(String key, Object object) {
+		getSqlSession().delete(key, object);
+	}
+	//get object by params
+	protected <T> T get(String key, Object params) {
+		return getSqlSession().selectOne(key, params);
+	}
+	//get all list
+	protected <T> List<T> getList(String key) {
+		return getSqlSession().selectList(key);
+	}
+	//get list by params
+	protected <T> List<T> getList(String key, Object params) {
+		return getSqlSession().selectList(key, params);
+	}
+	
+	protected int getCount(String key){
+		return getSqlSession().selectOne(key);
+	}
+	
+	protected int getCount(String key,Object params){
+		return getSqlSession().selectOne(key,params);
+	}
+	
+
+		
+}

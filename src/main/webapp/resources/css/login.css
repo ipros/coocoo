@@ -1,0 +1,42 @@
+@charset "utf-8";
+body {
+	background-image: url(../images/login/bj.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-color: #2486b7;
+	margin: 0px;
+	padding: 0px;
+	height: 697px;
+}
+.Frame {
+	width: 730px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 153px;
+}
+.logo {
+	height: 114px;
+}
+.Login {
+	width: 300px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 80px;
+}
+.kuw {
+	line-height: 35px;
+	height: 35px;
+	width:238px;
+	border:0px solid;
+	font-size: 14px;
+	color: #000000;
+	background-color: 0xffffff;
+}
+.bu1{
+	cursor:pointer;
+	height:46px;
+	width:113px;
+	border:0;
+	background-image: url(../images/login/dd_07.jpg);
+	background-repeat: no-repeat;
+}

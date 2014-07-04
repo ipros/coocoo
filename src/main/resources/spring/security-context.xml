@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:s="http://www.springframework.org/schema/security"
+	xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+    http://www.springframework.org/schema/security 
+    http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+    <description>Spring-security 安全配置</description>
+	    <!-- 启用安全注解 -->
+    <s:global-method-security pre-post-annotations="enabled"/>
+    
+    <!-- 解决权限标签 <sec:authorize url="/surveyInfo/list/survey"> 无法使用问题-->
+    <bean id="customWebInvocationPrivilegeEvaluator" class="org.springframework.security.web.access.DefaultWebInvocationPrivilegeEvaluator">
+        <constructor-arg name="securityInterceptor" ref="securityFilter" />
+    </bean>
+    
+    <!-- 该路径下的资源不过滤 -->
+    <s:http pattern="/resources/**" security="none"></s:http>
+    <s:http pattern="/login.jsp*" security="none"/>
+    <s:http pattern="/userInfo/timeOut*" security="none"></s:http>
+    <s:http pattern="/userInfo/login*" security="none"></s:http>
+    
+    <!-- /accessDenied.jsp没有权限 -->
+	<s:http auto-config="true">
+		<!-- login.jsp登陆界面   main.jsp登陆后主界面   login.jsp?error=true用户名不存在 -->
+		<!-- <s:form-login login-page="/login.jsp" default-target-url="/main.jsp" access-denied-page="/userInfo/denied" 
+		authentication-failure-url="/login.jsp?error=true"/> -->
+		
+		<!-- default-target-url="/userInfo/login" authentication-failure-url="/userInfo/login?error=true"-->
+		<s:form-login login-page="/login.jsp"  
+		always-use-default-target="true" 
+		authentication-success-handler-ref="successHandler"
+		authentication-failure-handler-ref="failureHandler"
+		/>
+		<!-- 退出系统后返回到login.jsp页面 -->
+		<s:logout logout-success-url="/"/>
+		<!-- <s:intercept-url pattern="/**" access="ROLE_USER"/> -->
+		
+		<!-- 会话配置管理 /userInfo/timeOut会话过期路径-->
+        <s:session-management session-fixation-protection="none" invalid-session-url="/userInfo/timeOut">
+        	<!-- max-sessions同一个用户登录最大session数   
+        		error-if-maximum-exceeded false第二次登录会让第一次登录失效 true防止2次登陆 
+            <s:concurrency-control max-sessions="20" error-if-maximum-exceeded="false" expired-url="/userInfo/timeOut"/>-->
+        </s:session-management>
+        <!-- 登出时删除会话cookies -->
+		<s:logout delete-cookies="JSESSIONID" />
+  		
+		<s:custom-filter ref="securityFilter" before="FILTER_SECURITY_INTERCEPTOR"/>
+	</s:http>
+	
+	<s:authentication-manager alias="authManager">
+		<s:authentication-provider user-service-ref="userServiceDetail">
+			<!-- <s:password-encoder hash="md5"/> -->
+			<!-- <s:jdbc-user-service data-source-ref="dataSource"/> -->
+		</s:authentication-provider>
+	</s:authentication-manager>
+	
+	 <!-- 自定义过滤器  -->  
+  <bean id="securityFilter" class="com.coocoo.utils.security.FilterSecurityInterceptor">  
+    <property name="accessDecisionManager" ref="accessDescisionManager"></property>  
+    <property name="securityMetadataSource" ref="securityMetadataSource"></property>  
+    <property name="authenticationManager" ref="authManager"></property>  
+  </bean>  
+    
+  <bean id="securityMetadataSource" class="com.coocoo.utils.security.SecurityMetadataSource">
+  	<constructor-arg name="resourceInfoService" ref="resourceInfoService"></constructor-arg>
+  </bean>  
+    
+  <bean id="accessDescisionManager" class="com.coocoo.utils.security.AccessDescisionManager"></bean>  
+       
+  <bean id="userServiceDetail" class="com.coocoo.utils.security.UserDetailServiceImpl"> </bean>  
+	
+	
+	<!-- 登录成功业务处理 -->
+  <bean id="successHandler" class="com.coocoo.utils.security.LoginAuthenticationSuccesssHandler">
+  	<property name="defaultUrl" value="/main.jsp"></property>  <!-- 可变换登录成功后的路径 -->
+  </bean>
+  <!-- 登录失败业务处理 -->
+  <bean id="failureHandler" class="com.coocoo.utils.security.LoginAuthenticationFailureHandler">
+  	<property name="defaultUrl" value="/"></property>  <!-- 可变换登录失败后的路径 -->
+  </bean>
+</beans>

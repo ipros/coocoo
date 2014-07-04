@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd 
+	http://www.springframework.org/schema/mvc 
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<description>Spring-web MVC配置</description>
+
+	<!-- 对所有类进行扫描，以完成bean的创建和依赖注入功能 -->
+	<context:component-scan base-package="com.coocoo">
+		<!-- 不扫描带有@Service注解的类 -->
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+	
+	<!--启用 MVC 注解，调整Spring默认配置-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <!--调整String消息转换器的字符编码为 utf-8-->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter" c:defaultCharset="UTF-8"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+	
+
+	<!-- spring mvc实现上传需添加该操作类 依赖包commons-fileupload-1.2.2.jar commons-io-2.0.1.jar -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 指定所上传文件的总大小不能超过5000KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+		<property name="maxUploadSize" value="52428800" />
+		<property name="maxInMemorySize">
+			<value>2048</value>
+		</property>
+	</bean>
+
+	<mvc:resources location="/resources/**" mapping="/resources/**" />
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/pages/" />
+
+		<!-- 模板后缀，指定html页面为模板 -->
+		<property name="suffix" value=".jsp" />
+		<!-- 使用这个模板类来解析视图 -->
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<!-- 模板输出内容编码，此处应与defaultEncoding保持一致 -->
+		<property name="contentType" value="text/html;charset=UTF-8" />
+	</bean>
+
+	<!--定义异常处理页面 -->
+	<bean id="exceptionResolver"
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<!-- 出现Exception异常，则跳转到common/exception.jsp页面 -->
+				<prop key="org.springframework.web.HttpRequestMethodNotSupportedException">common/request_method</prop>
+				<prop key="java.lang.Exception">common/exception</prop>
+			</props>
+		</property>
+	</bean>
+</beans>
