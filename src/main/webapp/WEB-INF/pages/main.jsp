@@ -13,7 +13,7 @@ $(function(){
 	$('#logout').click(function(){
 		$.messager.confirm('确认','是否退出系统？',function(res){
 			if(res){
-				window.location.href = '${ctx}/logout';
+				window.location.href = 'j_spring_security_logout';
 			}
 		});
 	});

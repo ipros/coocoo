@@ -2,8 +2,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:s="http://www.springframework.org/schema/security"
-	xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:c="http://www.springframework.org/schema/c"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
     http://www.springframework.org/schema/security 
@@ -19,9 +17,8 @@
     
     <!-- 该路径下的资源不过滤 -->
     <s:http pattern="/resources/**" security="none"></s:http>
-    <s:http pattern="/login.jsp*" security="none"/>
+    <s:http pattern="/" security="none"/>
     <s:http pattern="/userInfo/timeOut*" security="none"></s:http>
-    <s:http pattern="/userInfo/login*" security="none"></s:http>
     
     <!-- /accessDenied.jsp没有权限 -->
 	<s:http auto-config="true">
@@ -30,20 +27,22 @@
 		authentication-failure-url="/login.jsp?error=true"/> -->
 		
 		<!-- default-target-url="/userInfo/login" authentication-failure-url="/userInfo/login?error=true"-->
-		<s:form-login login-page="/login.jsp"  
+		<s:form-login login-page="/"
 		always-use-default-target="true" 
 		authentication-success-handler-ref="successHandler"
 		authentication-failure-handler-ref="failureHandler"
+        username-parameter="username"
+        password-parameter="password"
 		/>
-		<!-- 退出系统后返回到login.jsp页面 -->
-		<s:logout logout-success-url="/"/>
+		<!-- 退出系统后返回到登录页面 -->
+		<s:logout logout-success-url="/" invalidate-session="true"/>
 		<!-- <s:intercept-url pattern="/**" access="ROLE_USER"/> -->
 		
 		<!-- 会话配置管理 /userInfo/timeOut会话过期路径-->
         <s:session-management session-fixation-protection="none" invalid-session-url="/userInfo/timeOut">
         	<!-- max-sessions同一个用户登录最大session数   
-        		error-if-maximum-exceeded false第二次登录会让第一次登录失效 true防止2次登陆 
-            <s:concurrency-control max-sessions="20" error-if-maximum-exceeded="false" expired-url="/userInfo/timeOut"/>-->
+        		error-if-maximum-exceeded false第二次登录会让第一次登录失效 true防止2次登陆 -->
+            <s:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" expired-url="/userInfo/isLogin"/>
         </s:session-management>
         <!-- 登出时删除会话cookies -->
 		<s:logout delete-cookies="JSESSIONID" />
@@ -76,7 +75,7 @@
 	
 	<!-- 登录成功业务处理 -->
   <bean id="successHandler" class="com.coocoo.utils.security.LoginAuthenticationSuccesssHandler">
-  	<property name="defaultUrl" value="/main.jsp"></property>  <!-- 可变换登录成功后的路径 -->
+  	<property name="defaultUrl" value="/main"></property>  <!-- 可变换登录成功后的路径 -->
   </bean>
   <!-- 登录失败业务处理 -->
   <bean id="failureHandler" class="com.coocoo.utils.security.LoginAuthenticationFailureHandler">

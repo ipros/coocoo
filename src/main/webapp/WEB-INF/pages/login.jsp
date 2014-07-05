@@ -24,11 +24,11 @@ $(function(){
   <div class="Login">
   <table width="100%" height="136" border="0" cellpadding="0" cellspacing="0" style="margin-left:86px;">
   <tr>
-    <td width="65%" height="60" valign="top"><input name="j_username"  style="margin-top: 4px;" type="text" class="kuw easyui-validatebox" id="username"  data-options="required:true,validType:'minLength[5]' " missingMessage="请输入用户名"/></td>
+    <td width="65%" height="60" valign="top"><input name="username"  style="margin-top: 4px;" type="text" class="kuw easyui-validatebox" id="username"  data-options="required:true,validType:'minLength[5]' " missingMessage="请输入用户名"/></td>
   </tr>
   
   <tr>
-    <td  height="50" valign="top"><input name="j_password"  style="margin-top: 6px; "  type="password" class="kuw easyui-validatebox"  id="password"   data-options="required:true,validType:['length[6,16]']" missingMessage="请输入密码"/></td>
+    <td  height="50" valign="top"><input name="password"  style="margin-top: 6px; "  type="password" class="kuw easyui-validatebox"  id="password"   data-options="required:true,validType:['length[6,16]']" missingMessage="请输入密码"/></td>
   </tr>
   <tr>
   	<td height="25" valign="middle" ><font color="red" id="message">${message}</font></td>
