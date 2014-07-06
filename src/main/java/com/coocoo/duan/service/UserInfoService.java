@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.coocoo.utils.interceptor.pager.Pager;
 
 import com.coocoo.duan.model.UserInfo;
 import com.coocoo.orm.mapper.UserInfoMapper;
@@ -13,7 +14,7 @@ import com.coocoo.orm.mapper.UserInfoMapper;
 public class UserInfoService {
 
 	@Autowired
-	private UserInfoMapper< UserInfo> userInfoMapper;
+	private UserInfoMapper<UserInfo> userInfoMapper;
 
 	public List<UserInfo> findAll() {
 //		System.out.println(mapper.findAll().size());

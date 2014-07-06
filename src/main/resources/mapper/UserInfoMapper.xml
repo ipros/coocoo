@@ -39,4 +39,11 @@
 		left join tbl_role_info c on c.id=b.rid
 		where a.username=#{username}
 	</select>
+
+    <select id="getListByPager"  resultMap="userInfoMap">
+        select
+        <include refid="column_id"/>
+        from tbl_user_info
+    </select>
+
 </mapper>

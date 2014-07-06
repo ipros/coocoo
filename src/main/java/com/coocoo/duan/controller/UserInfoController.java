@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.coocoo.utils.interceptor.pager.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,9 @@ public class UserInfoController{
 	}
     @RequestMapping(value="listPage",method=RequestMethod.POST)
     public @ResponseBody String listPage(){
-        List<UserInfo> userInfos ＝ userInfoService.findAll();
+        Pager<UserInfo> pager = Pager.DEFAULT;
+        List<UserInfo> userInfos = userInfoService.getUserInfosByPage(pager);
+        return userInfos.toString();
     }
 
     /**

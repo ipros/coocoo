@@ -43,8 +43,11 @@ public class UserInfoServiceTest {
 	}
     @Test
     public void testGetUserInfosByPage(){
-        Pager<UserInfo>
-        userInfoService.getUserInfosByPage();
+        Pager<UserInfo> pager = Pager.DEFAULT;
+        List<UserInfo> userInfos = userInfoService.getUserInfosByPage(pager);
+        for (UserInfo userInfo : userInfos) {
+            System.out.println(userInfo.getUsername());
+        }
     }
 
 }
