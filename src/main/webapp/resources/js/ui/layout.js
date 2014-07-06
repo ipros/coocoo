@@ -45,8 +45,10 @@ function ShowMenu(obj,n){
 				$('#tabs').tabs('add',{
 					title:subtitle,
 					iconCls:icon,
-					content:createFrame(url),
+					//content:createFrame(url),//通过创建 iframe 生成新tabpage
+                    href:url,//通过嵌套div 生成 tabpage ，跨域请求会有问题
 					closable:true,
+                    fit:true,
 					width:$('#mainPanle').width()-10,
 					height:$('#mainPanle').height()-26
 				});
@@ -59,7 +61,7 @@ function ShowMenu(obj,n){
 						y = i;
 					}
 				});	
-				refreshTab({tabTitle:subtitle,url:url,index:y});  
+				//refreshTab({tabTitle:subtitle,url:url,index:y});
 				//刷新已经打开的tabs
 			}
 			tabClose();
@@ -69,13 +71,13 @@ function ShowMenu(obj,n){
 		function refreshTab(cfg){ 
 			//获取刷新的iframe
     		var refresh_tab = cfg.tabTitle?$('#tabs').tabs('getTab',cfg.tabTitle):$('#tabs').tabs('getSelected');
-    		if(refresh_tab && refresh_tab.find('iframe').length > 0){ 
+    		if(refresh_tab && refresh_tab.find('iframe').length > 0){
     			if(cfg.index>0){
     				cfg.index = cfg.index;
     			}
-    			var _refresh_ifram = refresh_tab.find('iframe')[cfg.index];  
-    			var refresh_url = cfg.url?cfg.url:_refresh_ifram.src; 
-    			_refresh_ifram.contentWindow.location.href=refresh_url;  
+    			var _refresh_ifram = refresh_tab.find('iframe')[cfg.index];
+    			var refresh_url = cfg.url?cfg.url:_refresh_ifram.src;
+    			_refresh_ifram.contentWindow.location.href=refresh_url;
         	}
         }
 		

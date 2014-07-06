@@ -21,6 +21,7 @@ public class ResourceInfoService {
 	public List<ResourceInfo> getResourceRole(){
 		return resourceInfoMapper.getResourceRole();
 	}
+
 	public List<ResourceInfo> getResourceRole(Pager<ResourceInfo> pager){
 		return resourceInfoMapper.getResourceRoles(pager);
 	}

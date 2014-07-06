@@ -34,7 +34,7 @@ $(function(){
 			<div class="easyui-accordion" data-options="fit:true,border:false"  data-options="selected:true">
 				<div title="终端管理"  data-options="iconCls:'icon-sum'" style="padding:5px;">
 				<ul>
-					<li onclick="addTab('插播预警','${ctx}/surveyInfo/list/survey','icon-sum')"><a href="javascript:void(0)"><span class="icon-sum"></span>插播预警</a></li>
+					<li onclick="addTab('插播预警','http://www.baidu.com','icon-sum')"><a href="javascript:void(0)"><span class="icon-sum"></span>插播预警</a></li>
 				  	<li onclick="addTab('终端监控','${ctx}/terminalmanage/terminalMonitor','')"><a href="javascript:void(0)"><span class=""></span>终端监控</a></li>
 				  	<li onclick="addTab('分组管理','${ctx}/terminalmanage/groupmanage','')"><a href="javascript:void(0)"><span class=""></span>分组管理</a></li>
 				  	<li onclick="addTab('视频播放设置','${ctx}/surveyInfo/list/survey','')"><a href="javascript:void(0)"><span class=""></span>视频播放设置</a></li>
@@ -60,7 +60,7 @@ $(function(){
 				</div>
 				<div title="系统设置" data-options="iconCls:''" style="padding:10px;">
 				<ul>
-				  <li onclick="addTab('用户管理','${ctx}/msgTable/list/msg','')"><a href="javascript:void(0)"><span class=""></span>用户管理</a></li>
+				  <li onclick="addTab('用户管理','${ctx}/userInfo/list','')"><a href="javascript:void(0)"><span class=""></span>用户管理</a></li>
 				  <li onclick="addTab('角色管理','${ctx}/msgTable/list/msg','')"><a href="javascript:void(0)"><span class=""></span>角色管理</a></li>
 				  <li onclick="addTab('权限管理','${ctx}/msgTable/list/msg','')"><a href="javascript:void(0)"><span class=""></span>权限管理</a></li>
 				  
@@ -80,7 +80,7 @@ $(function(){
     <div id="mainPanle" region="center" style="background: #eee;">
         <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
 			<div title="主页" data-options="iconCls:'icon-search'" id="home" width="99%">
-				<div style="line-height:100%; width: 100%;height: 100%;background: url('${resourceUrl}/images/welcome.jpg') no-repeat;background-size:100% 100%;">欢迎使用SWR后台管理系统</div>
+				<div style="line-height:100%; width: 100%;height: 100%;background: url('${ctx }/resources/images/login/welcome.jpg') no-repeat;background-size:100% 100%;">欢迎使用SWR后台管理系统</div>
 			</div>
 		</div>
     </div>

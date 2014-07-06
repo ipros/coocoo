@@ -8,10 +8,9 @@
 <title>用户管理</title>
 </head>
 <body>
-<c:forEach items="${userInfos }"  var="userInfo">
-		${userInfo.userName}
-</c:forEach>
+<table >
 
-${ctx }
+
+</table>
 </body>
 </html>

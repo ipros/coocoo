@@ -11,6 +11,11 @@
 <script type="text/javascript">
 $(function(){
 	//$('#username').focus();
+    $('#iform').form('submit',{
+        onSubmit: function(){
+            return $(this).form('validate');
+        }
+    });
 	
 });
 

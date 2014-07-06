@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.coocoo.duan.model.UserInfo;
 import com.coocoo.duan.service.UserInfoService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/userInfo")
@@ -23,8 +24,12 @@ public class UserInfoController{
 	public String list(HttpServletRequest request){
 	    List<UserInfo> userInfos = userInfoService.findAll();
 		request.setAttribute("userInfos", userInfos);
-		return "main";
+		return "system/userInfoList";
 	}
+    @RequestMapping(value="listPage",method=RequestMethod.POST)
+    public @ResponseBody String listPage(){
+        List<UserInfo> userInfos ＝ userInfoService.findAll();
+    }
 
     /**
      * 超时

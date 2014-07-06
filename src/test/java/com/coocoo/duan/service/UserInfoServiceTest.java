@@ -3,6 +3,7 @@ package com.coocoo.duan.service;
 import java.util.List;
 
 
+import com.coocoo.utils.interceptor.pager.Pager;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,5 +41,10 @@ public class UserInfoServiceTest {
 		UserInfo userInfo = userInfoService.getUserRoleByUsername("admin");
 			System.out.println(userInfo.getUsername());
 	}
+    @Test
+    public void testGetUserInfosByPage(){
+        Pager<UserInfo>
+        userInfoService.getUserInfosByPage();
+    }
 
 }
