@@ -34,13 +34,10 @@ $(function(){
 			<div class="easyui-accordion" data-options="fit:true,border:false"  data-options="selected:true">
 				<div title="终端管理"  data-options="iconCls:'icon-sum'" style="padding:5px;">
 				<ul>
-					<li onclick="addTab('插播预警','http://www.baidu.com','icon-sum')"><a href="javascript:void(0)"><span class="icon-sum"></span>插播预警</a></li>
-				  	<li onclick="addTab('终端监控','${ctx}/terminalmanage/terminalMonitor','')"><a href="javascript:void(0)"><span class=""></span>终端监控</a></li>
-				  	<li onclick="addTab('分组管理','${ctx}/terminalmanage/groupmanage','')"><a href="javascript:void(0)"><span class=""></span>分组管理</a></li>
-				  	<li onclick="addTab('视频播放设置','${ctx}/surveyInfo/list/survey','')"><a href="javascript:void(0)"><span class=""></span>视频播放设置</a></li>
-				  	<li onclick="addTab('终端宽带管理','${ctx}/surveyInfo/list/survey','')"><a href="javascript:void(0)"><span class=""></span>终端宽带管理</a></li>
-				  	<li onclick="addTab('终端信息管理','${ctx}/surveyInfo/list/survey','')"><a href="javascript:void(0)"><span class=""></span>终端信息管理</a></li>
-				  	<li onclick="addTab('程序升级管理','${ctx}/surveyInfo/list/survey','')"><a href="javascript:void(0)"><span class=""></span>程序升级管理</a></li>
+					<li onclick="addTab('预警信息发布','${ctx}/','icon-sum')"><a href="javascript:void(0)"><span class="icon-sum"></span>插播预警</a></li>
+				  	<li onclick="addTab('预警信息监控','${ctx}/terminalmanage/terminalMonitor','')"><a href="javascript:void(0)"><span class=""></span>终端监控</a></li>
+				  	<li onclick="addTab('预警发布日志','${ctx}/terminalmanage/groupmanage','')"><a href="javascript:void(0)"><span class=""></span>分组管理</a></li>
+				  	<li onclick="addTab('预警发布信息','${ctx}/surveyInfo/list/survey','')"><a href="javascript:void(0)"><span class=""></span>视频播放设置</a></li>
 				 </ul> 
 				</div>
 				<div title="统计管理" data-options="iconCls:''" style="padding:10px;">
