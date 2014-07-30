@@ -36,6 +36,7 @@ public class ResourceInfoServiceTest {
 			List<RoleInfo> roleInfos = resourceInfo.getRoleInfos();
 			String resourceName = resourceInfo.getResourceName() ;
 			for (RoleInfo roleInfo:roleInfos) {
+				
 				System.out.println(resourceName+ roleInfo.getRoleName());
 			}
 		}
